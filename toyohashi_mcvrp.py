@@ -277,8 +277,9 @@ def set_map_data():
     map_data['path_d'] = pd.read_json(root_dir + route_file)    # 経路リスト
 
     # OSMnx で道路グラフ取得
-    #place = {'city' : 'Toyohashi', 'state' : 'Aichi', 'country' : 'Japan'}
+    place = {'city' : 'Toyohashi', 'state' : 'Aichi', 'country' : 'Japan'}
     #map_data['G'] = ox.graph_from_place(place, network_type='drive')
+    map_data['G'] = ox.simplify_graph(ox.graph_from_place(place, network_type='drive'))
 
     # ベース地図作成
     map_data['base_map']=disp_baseMap(map_data['gep_map'] )
