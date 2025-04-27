@@ -140,7 +140,7 @@ FORMAT_HTML = '<div>【{type}】<br/><b>{name}</b><br/>住所:{address}<div>'
 # ここからFolium を使う表示系関数
 ########################################
 
-def disp_odawaraMap(odawara_district,center=mapcenter, zoom_start=GIS_ZOOM):
+def disp_baseMap(odawara_district,center=mapcenter, zoom_start=GIS_ZOOM):
     m = folium.Map(
         location=center,
         tiles=Map_Tile,
@@ -272,16 +272,16 @@ def set_map_data():
     map_data['node_d']=pd.read_json(root_dir + node_data)    #拠点データ
 
     administrative_district = gpd.read_file(geojson_path)
-    map_data['gep_map']=administrative_district[administrative_district["N03_004"]=="小田原市"]  # 小田原市フィルタリング
+    map_data['gep_map']=administrative_district[administrative_district["N03_004"]=="豊橋市"]  # 豊橋市フィルタリング
 
     map_data['path_d'] = pd.read_json(root_dir + route_file)    # 経路リスト
 
     # OSMnx で道路グラフ取得
-    place = {'city' : 'Odawara', 'state' : 'Kanagawa', 'country' : 'Japan'}
+    place = {'city' : 'Toyohashi', 'state' : 'Aichi', 'country' : 'Japan'}
     map_data['G'] = ox.graph_from_place(place, network_type='drive')
 
     # ベース地図作成
-    map_data['base_map']=disp_odawaraMap(map_data['gep_map'] )
+    map_data['base_map']=disp_baseMap(map_data['gep_map'] )
 
     return(map_data)
 
