@@ -277,8 +277,8 @@ def set_map_data():
     map_data['path_d'] = pd.read_json(root_dir + route_file)    # 経路リスト
 
     # OSMnx で道路グラフ取得
-    place = {'city' : 'Toyohashi', 'state' : 'Aichi', 'country' : 'Japan'}
-    map_data['G'] = ox.graph_from_place(place, network_type='drive')
+    #place = {'city' : 'Toyohashi', 'state' : 'Aichi', 'country' : 'Japan'}
+    #map_data['G'] = ox.graph_from_place(place, network_type='drive')
 
     # ベース地図作成
     map_data['base_map']=disp_baseMap(map_data['gep_map'] )
@@ -520,8 +520,9 @@ selected_base=st.session_state['points']
 np_df= st.session_state["num_of_people"]
 
 # すべての拠点のリストを取得
-all_shelter= df[df['Node'].str.startswith('K')]
-all_transport= df[df['Node'].str.startswith('M')]
+
+all_shelter= df[df['Node'].str.startswith('D')| df['Node'].str.startswith('W')|df['Node'].str.startswith('T')|df['Node'].str.startswith('R')]
+all_transport= df[df['Node'].str.startswith('S')]
 
 # 右カラムで拠点選択UIを表示
 with anr_st:
