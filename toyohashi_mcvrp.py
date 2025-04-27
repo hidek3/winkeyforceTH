@@ -189,7 +189,7 @@ def plot_select_marker(m, data,op_data):
 
     for _, row in data.iterrows():
         # 避難所ノード判定
-        if row['Node'][0] == '':
+        if row['Node'][0] in 'DWTR':
           if row['Node'] in (op_data['避難所']):
             icol = 'green'
             layer=actve_layer
